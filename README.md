@@ -7,8 +7,10 @@ Simple crud app with React + Ts (tailwind, tanstack - router, query, form)
 - [*] Initialize the repo
 - [*] Create the app using vite and react.ts template
 - [*] Install and configure tailwind
-- [] Install and condifure tanstack (form, query, router) + zod
-- [*] Configure contacts api
+- [*] Install tanstack (form, query, router) + zod
+- [*] Configure tanstack-router
+- [] Configure tanstack-form + zod
+- [] Configure tanstack-query + JSONplaceholder
 - [] Create app ui
   - [] create sidebar
   - [] create contact details

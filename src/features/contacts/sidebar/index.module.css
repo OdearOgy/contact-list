@@ -22,7 +22,7 @@
 }
 
 .sidebar {
-  @apply border-r-2 border-primary-400 p-2;
+  @apply border-r-2 border-primary-400 p-2 pr-8;
 
   & > * + * {
     @apply mt-7;

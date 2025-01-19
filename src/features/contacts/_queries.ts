@@ -1,13 +1,14 @@
 import { API_URL } from "../api/constants";
 
-export const FetchContacts = async () => {
-  const response = await fetch(`${API_URL}/users`);
-  return await response.json();
+export type Contact = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  username: string;
 };
 
-// export const AddContact = async (contact: { name: string }) => {
-//   const response = await fetch(`${API_URL}/users`, {
-//     method: "POST",
-//     body: { ...contact },
-//   });
-// };
+export const FetchContacts = async () => {
+  const response = await fetch(`${API_URL}/users`);
+  return (await response.json()) as Contact[];
+};

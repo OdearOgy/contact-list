@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { Cluster } from "../../components";
 import { FetchContacts } from "./_queries";
+import Sidebar from "./sidebar";
 
 const KEY = "contacts";
 
@@ -18,11 +20,9 @@ const Contacts = () => {
   }
 
   return (
-    <div>
-      Contacts page
-      <br />
-      {JSON.stringify(data, null, 4)}
-    </div>
+    <Cluster>
+      <Sidebar data={data} />
+    </Cluster>
   );
 };
 

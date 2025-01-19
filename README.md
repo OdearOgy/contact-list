@@ -1,6 +1,6 @@
 # Contact List
 
-Test task for Munich Ventures
+Simple crud app with React + Ts (tailwind, tanstack - router, query, form)
 
 ## TODO
 
@@ -8,7 +8,7 @@ Test task for Munich Ventures
 - [*] Create the app using vite and react.ts template
 - [*] Install and configure tailwind
 - [] Install and condifure tanstack (form, query, router) + zod
-- [] Configure contacts api
+- [*] Configure contacts api
 - [] Create app ui
   - [] create sidebar
   - [] create contact details

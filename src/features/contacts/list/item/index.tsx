@@ -1,0 +1,42 @@
+import { FunctionComponent } from "react";
+import { Cluster, Stack } from "../../../../components";
+import { Contact } from "../../_queries/models";
+import styles from "./index.module.css";
+
+const getInitials = (name: string) => {
+  const n = name?.trim().split(" ");
+
+  if (!n?.[0]) {
+    return "";
+  }
+
+  let initials = n?.[0]?.[0];
+
+  if (n.length > 1) {
+    initials += n?.[1]?.[0];
+  }
+
+  return initials.toUpperCase();
+};
+
+const ContactItem: FunctionComponent<{
+  data: Contact;
+}> = ({ data }) => {
+  const { name, phone } = data;
+  const initials = getInitials(name);
+
+  return (
+    <Cluster className={styles.item}>
+      <div className={styles.avatar} title={name}>
+        <span>{initials}</span>
+      </div>
+
+      <Stack className={styles.body}>
+        <h2 title={name}>{name}</h2>
+        <p title={phone}> {phone}</p>
+      </Stack>
+    </Cluster>
+  );
+};
+
+export default ContactItem;

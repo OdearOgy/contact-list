@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Cluster, Stack } from "../../components";
+import Add from "./add";
 import styles from "./index.module.css";
 import List from "./list";
 import Search from "./search";
@@ -10,10 +11,13 @@ const Contacts = () => {
   return (
     <Cluster>
       <Stack className={styles.sidebar}>
-        <div className={styles.header}>
+        <Cluster className={styles.header}>
           <Search search={search} setSearch={setSearch} />
+          <Add />
+        </Cluster>
+        <div className={styles.body}>
+          <List search={search} />
         </div>
-        <List search={search} />
       </Stack>
     </Cluster>
   );

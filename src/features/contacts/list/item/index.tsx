@@ -26,14 +26,14 @@ const ContactItem: FunctionComponent<{
   const initials = getInitials(name);
 
   return (
-    <Cluster className='gap-2 items-center'>
-      <div className={styles.avatar}>
+    <Cluster className={styles.item}>
+      <div className={styles.avatar} title={name}>
         <span>{initials}</span>
       </div>
 
       <Stack className={styles.body}>
-        <h2>{name}</h2>
-        <p> {phone}</p>
+        <h2 title={name}>{name}</h2>
+        <p title={phone}> {phone}</p>
       </Stack>
     </Cluster>
   );

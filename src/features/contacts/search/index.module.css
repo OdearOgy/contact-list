@@ -1,5 +1,5 @@
 .field {
-  @apply relative pb-5;
+  @apply w-72 relative;
 
   .input {
     @apply border-2 rounded-md border-primary-400;
@@ -8,7 +8,7 @@
   }
 
   .helpText {
-    @apply absolute left-0 text-danger-600;
-    bottom: -5%;
+    @apply mt-1 text-danger-600 absolute -bottom-6;
+    @apply w-full text-ellipsis overflow-hidden whitespace-nowrap;
   }
 }

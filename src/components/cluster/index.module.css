@@ -1,0 +1,3 @@
+.cluster {
+  @apply flex flex-wrap justify-start items-start;
+}

@@ -1,0 +1,14 @@
+.field {
+  @apply w-72 relative;
+
+  .input {
+    @apply border-2 rounded-md border-primary-400;
+    @apply hover:border-primary-500 active:border-primary-600 focus:border-primary-600;
+    @apply py-1 px-2;
+  }
+
+  .helpText {
+    @apply mt-1 text-danger-600 absolute -bottom-6;
+    @apply w-full text-ellipsis overflow-hidden whitespace-nowrap;
+  }
+}

@@ -1,0 +1,4 @@
+.cover {
+  @apply flex flex-col p-5;
+  min-height: 100vh;
+}

@@ -9,10 +9,10 @@ Simple crud app with React + Ts (tailwind, tanstack - router, query, form)
 - [*] Install and configure tailwind
 - [*] Install tanstack (form, query, router) + zod
 - [*] Configure tanstack-router
-- [] Configure tanstack-form + zod
-- [] Configure tanstack-query + JSONplaceholder
+- [*] Configure tanstack-form + zod
+- [*] Configure tanstack-query + JSONplaceholder
 - [] Create app ui
-  - [] create sidebar
+  - [*] create sidebar
   - [] create contact details
   - [] add contact creation modal
   - [] add contact edit modal

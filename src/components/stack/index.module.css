@@ -1,0 +1,7 @@
+.stack {
+  @apply flex flex-col justify-start;
+}
+
+.stack > * + * {
+  @apply mt-3;
+}

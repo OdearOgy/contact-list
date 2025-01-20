@@ -1,27 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import { Cluster } from "../../components";
-import { FetchContacts } from "./_queries";
-import Sidebar from "./sidebar";
-
-const KEY = "contacts";
+import { useState } from "react";
+import { Cluster, Stack } from "../../components";
+import styles from "./index.module.css";
+import List from "./list";
+import Search from "./search";
 
 const Contacts = () => {
-  const { data, isError, isPending } = useQuery({
-    queryKey: [KEY],
-    queryFn: FetchContacts,
-  });
-
-  if (isPending) {
-    return <div>loading ....</div>;
-  }
-
-  if (isError) {
-    return <div>some random error</div>;
-  }
+  const [search, setSearch] = useState("");
 
   return (
     <Cluster>
-      <Sidebar data={data} />
+      <Stack className={styles.sidebar}>
+        <div className={styles.header}>
+          <Search search={search} setSearch={setSearch} />
+        </div>
+        <List search={search} />
+      </Stack>
     </Cluster>
   );
 };

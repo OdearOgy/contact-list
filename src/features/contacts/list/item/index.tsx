@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
-import { Cluster, Stack } from "../../../components";
-import { type Contact } from "../_queries";
+import { Cluster, Stack } from "../../../../components";
+import { Contact } from "../../_queries/models";
 import styles from "./index.module.css";
 
 const getInitials = (name: string) => {
@@ -26,7 +26,7 @@ const ContactItem: FunctionComponent<{
   const initials = getInitials(name);
 
   return (
-    <Cluster className="gap-2 items-center">
+    <Cluster className='gap-2 items-center'>
       <div className={styles.avatar}>
         <span>{initials}</span>
       </div>
@@ -39,16 +39,4 @@ const ContactItem: FunctionComponent<{
   );
 };
 
-const Sidebar: FunctionComponent<{
-  data: Contact[];
-}> = ({ data }) => {
-  return (
-    <Stack className={styles.sidebar}>
-      {data?.map((contact) => {
-        return <ContactItem data={contact} key={contact.id} />;
-      })}
-    </Stack>
-  );
-};
-
-export default Sidebar;
+export default ContactItem;

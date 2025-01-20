@@ -1,0 +1,14 @@
+.field {
+  @apply relative pb-5;
+
+  .input {
+    @apply border-2 rounded-md border-primary-400;
+    @apply hover:border-primary-500 active:border-primary-600 focus:border-primary-600;
+    @apply py-1 px-2;
+  }
+
+  .helpText {
+    @apply absolute left-0 text-danger-600;
+    bottom: -5%;
+  }
+}

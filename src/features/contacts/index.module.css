@@ -1,0 +1,7 @@
+.sidebar {
+  @apply w-3/12 border-r-2 border-primary-400 p-2 pr-8;
+
+  & > * + * {
+    @apply mt-7;
+  }
+}

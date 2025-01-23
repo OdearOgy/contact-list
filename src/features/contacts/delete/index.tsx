@@ -1,9 +1,18 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
-import { useCallback, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { Button } from "../../../components";
 import FormDialog from "../../../components/dialog";
+import { useDeleteContactMutation } from "../_queries";
 
-const Delete = () => {
+const Delete: FunctionComponent<{
+  id: number;
+}> = ({ id }) => {
+  const queryClient = useQueryClient();
+  const deleteMutation = useDeleteContactMutation(id, queryClient);
+
+  const navigate = useNavigate({ from: "/contacts/$contactId" });
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCancel = useCallback(() => {
@@ -11,8 +20,15 @@ const Delete = () => {
   }, []);
 
   const handleOk = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    deleteMutation.mutateAsync();
+  }, [deleteMutation]);
+
+  useEffect(() => {
+    if (deleteMutation.isSuccess) {
+      setIsOpen(false);
+      navigate({ to: "/contacts" });
+    }
+  }, [deleteMutation, navigate]);
 
   return (
     <>
@@ -26,6 +42,8 @@ const Delete = () => {
         variant='danger'
         onClick={() => setIsOpen(true)}
         prefixIcon={<TrashIcon />}
+        disabled={deleteMutation.isPending}
+        loading={deleteMutation.isPending}
       />
     </>
   );

@@ -7,11 +7,10 @@ import Edit from "../edit";
 import styles from "./index.module.css";
 
 const ContactDetails = () => {
-  const { contactId } = useParams({ strict: false });
+  const params = useParams({ strict: false });
+  const contactId = parseInt(params.contactId ?? "0");
 
-  const { data, isError, isPending } = useContactQuery(
-    parseInt(contactId ?? "0"),
-  );
+  const { data, isError, isPending } = useContactQuery(contactId);
 
   const initials = getInitials(data?.name ?? "");
 
@@ -30,7 +29,7 @@ const ContactDetails = () => {
           </Stack>
 
           <Edit />
-          <Delete />
+          <Delete id={contactId} />
         </Cluster>
       )}
     </Cover>

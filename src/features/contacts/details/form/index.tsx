@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { FunctionComponent, RefObject, useCallback, useState } from "react";
+import { FunctionComponent, RefObject, useCallback } from "react";
 import { z } from "zod";
 import { Input, Stack } from "../../../../components";
 import { Contact } from "../../_queries/models";
@@ -11,7 +11,7 @@ const detailsFormSchema = z.object({
 });
 
 const EMPTY: Contact = {
-  id: null,
+  id: 0,
   name: "",
   phone: "",
 };

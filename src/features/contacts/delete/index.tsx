@@ -1,9 +1,9 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { useCallback, useState } from "react";
 import { Button } from "../../../components";
 import FormDialog from "../../../components/dialog";
 
-const Add = () => {
+const Delete = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCancel = useCallback(() => {
@@ -17,18 +17,18 @@ const Add = () => {
   return (
     <>
       <FormDialog
-        title='Add Contact'
+        title='Delete Contact'
         open={isOpen}
         onCancel={handleCancel}
         onOk={handleOk}
       />
       <Button
-        variant='primary'
+        variant='danger'
         onClick={() => setIsOpen(true)}
-        prefixIcon={<PlusIcon />}
+        prefixIcon={<TrashIcon />}
       />
     </>
   );
 };
 
-export default Add;
+export default Delete;

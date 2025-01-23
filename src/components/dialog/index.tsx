@@ -17,8 +17,9 @@ const FormDialog: FunctionComponent<
     message?: string;
     onCancel?: () => void;
     onOk?: () => void;
+    loading?: boolean;
   }>
-> = ({ open, title, message, onCancel, onOk, children }) => {
+> = ({ open, title, message, onCancel, onOk, loading, children }) => {
   const handleCancel = useCallback(() => {
     onCancel?.();
   }, [onCancel]);
@@ -48,6 +49,8 @@ const FormDialog: FunctionComponent<
               onClick={handleOk}
               variant='primary'
               prefixIcon={<CheckIcon />}
+              loading={loading}
+              disabled={loading}
             >
               Ok
             </Button>

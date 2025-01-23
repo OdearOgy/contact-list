@@ -13,7 +13,7 @@ const Input: FunctionComponent<{
       <HeadlessInput
         name={field.name}
         onChange={(e) => field.handleChange(e.target.value)}
-        onBlur={() => field.form.handleSubmit()}
+        onBlur={() => field.handleBlur()}
         className={styles.input}
         value={field.state.value?.toString()}
         placeholder={placeholder}

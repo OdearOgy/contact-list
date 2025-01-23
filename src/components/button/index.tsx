@@ -1,5 +1,5 @@
 import { Button as HeadlessButton } from "@headlessui/react";
-import { CircleStackIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { FunctionComponent, PropsWithChildren, ReactNode } from "react";
 import Cluster from "../cluster";
 import styles from "./index.module.css";
@@ -36,13 +36,11 @@ const Button: FunctionComponent<
       className={btnCls}
       disabled={disabled}
       data-size={size}
+      data-loading={loading}
     >
-      <Cluster className={styles.body}>
+      <Cluster className={`${styles.body} ${loading ? styles.loading : ""}`}>
         {loading ? (
-          <span className={styles.prefix}>
-            <CircleStackIcon />
-            hello
-          </span>
+          <ArrowPathIcon className='animate-spin' />
         ) : (
           <>
             <span className={styles.prefix}>{prefixIcon}</span>

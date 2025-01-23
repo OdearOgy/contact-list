@@ -31,7 +31,7 @@ const ContactDetails = () => {
             </Stack>
 
             <Cluster className='gap-1'>
-              <Edit />
+              <Edit data={data} />
               <Delete id={contactId} />
             </Cluster>
           </Cluster>

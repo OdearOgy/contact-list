@@ -37,13 +37,12 @@ const Delete: FunctionComponent<{
         open={isOpen}
         onCancel={handleCancel}
         onOk={handleOk}
+        loading={deleteMutation.isPending}
       />
       <Button
         variant='danger'
         onClick={() => setIsOpen(true)}
         prefixIcon={<TrashIcon />}
-        disabled={deleteMutation.isPending}
-        loading={deleteMutation.isPending}
       />
     </>
   );

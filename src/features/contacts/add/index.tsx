@@ -13,7 +13,7 @@ const Add = () => {
   const [edit, setEdit] = useState({
     id: 0,
     name: "",
-    phone: "",
+    phone: 0,
   });
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -32,9 +32,9 @@ const Add = () => {
   const handleSubmit = useCallback(
     (formData: Contact) => {
       setEdit((prevState) => {
-        addMutation.mutate();
         return { ...prevState, ...formData };
       });
+      addMutation.mutate();
     },
     [setEdit, addMutation],
   );
@@ -58,6 +58,7 @@ const Add = () => {
         open={isOpen}
         onCancel={handleCancel}
         onOk={handleOk}
+        loading={addMutation.isPending}
       >
         <DetailsForm formRef={formRef} onSubmit={handleSubmit} />
       </FormDialog>
@@ -65,6 +66,7 @@ const Add = () => {
         variant='primary'
         onClick={() => setIsOpen(true)}
         prefixIcon={<PlusIcon />}
+        size='small'
       />
     </>
   );

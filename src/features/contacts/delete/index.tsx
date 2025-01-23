@@ -43,6 +43,7 @@ const Delete: FunctionComponent<{
         variant='danger'
         onClick={() => setIsOpen(true)}
         prefixIcon={<TrashIcon />}
+        size='small'
       />
     </>
   );

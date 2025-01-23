@@ -8,10 +8,8 @@ import styles from "./index.module.css";
 
 const ContactDetails = () => {
   const params = useParams({ strict: false });
-  const contactId = parseInt(params.contactId ?? "0");
-
-  const { data, isError, isPending } = useContactQuery(contactId);
-
+  const contactId = parseInt(params.contactId ?? "");
+  const { data, isError, isPending } = useContactQuery(contactId!);
   const initials = getInitials(data?.name ?? "");
 
   return (

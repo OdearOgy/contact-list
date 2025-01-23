@@ -67,6 +67,7 @@ const Edit: FunctionComponent<{
         variant='primary'
         onClick={() => setIsOpen(true)}
         prefixIcon={<PencilIcon />}
+        size='small'
       />
     </>
   );

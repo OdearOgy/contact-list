@@ -1,7 +1,7 @@
 export interface Contact {
   id: number;
   name: string;
-  phone: string;
+  phone: number;
 }
 
 export type Filter = {
@@ -10,5 +10,5 @@ export type Filter = {
 
 export interface FormDataDto {
   name: string;
-  phone: string;
+  phone: number;
 }

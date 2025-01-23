@@ -1,27 +1,32 @@
 import { Input as HeadlessInput } from "@headlessui/react";
-import { FieldApi } from "@tanstack/react-form";
+import { Updater, ValidationError } from "@tanstack/react-form";
 import { FunctionComponent } from "react";
 import Stack from "../stack";
 import styles from "./index.module.css";
 
 const Input: FunctionComponent<{
-  field: FieldApi<unknown, string>;
+  errors?: ValidationError[];
+  hidden?: boolean;
+  name: string;
+  onBlur: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (update: Updater<any>) => void;
   placeholder?: string;
-}> = ({ field, placeholder }) => {
+  value: unknown;
+}> = ({ name, value, onBlur, onChange, errors, placeholder, hidden }) => {
   return (
     <Stack className={styles.field}>
       <HeadlessInput
-        name={field.name}
-        onChange={(e) => field.handleChange(e.target.value)}
-        onBlur={() => field.handleBlur()}
+        name={name}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={() => onBlur()}
         className={styles.input}
-        value={field.state.value?.toString()}
+        value={value?.toString()}
         placeholder={placeholder}
+        hidden={hidden}
       />
-      {field.state.meta.errors ? (
-        <span className={styles.helpText}>
-          {field.state.meta.errors.join(", ")}
-        </span>
+      {errors ? (
+        <span className={styles.helpText}>{errors.join(", ")}</span>
       ) : null}
     </Stack>
   );

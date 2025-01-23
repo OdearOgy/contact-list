@@ -5,7 +5,7 @@ const Add = () => {
   return (
     <>
       <Popup />
-      <Button>
+      <Button variant='neutral'>
         <Cluster className='items-center justify-center gap-1'>
           <PlusIcon className='size-5' />
           Add

@@ -2,7 +2,7 @@ import Avatar from "./avatar";
 import Button from "./button";
 import Cluster from "./cluster";
 import Cover from "./cover";
-import Popup from "./popup";
+import Dialog from "./dialog";
 import Stack from "./stack";
 
-export { Avatar, Button, Cluster, Cover, Popup, Stack };
+export { Avatar, Button, Cluster, Cover, Dialog, Stack };

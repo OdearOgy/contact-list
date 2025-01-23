@@ -1,5 +1,38 @@
 .btn {
-  @apply border rounded py-2 px-4 text-sm;
+  @apply border rounded text-sm;
+
+  .body {
+    @apply flex-nowrap items-center gap-1;
+    @apply text-base;
+  }
+
+  .prefix {
+    @apply size-3;
+  }
+
+  &[data-size="large"] {
+    @apply py-2 px-4;
+
+    .prefix {
+      @apply size-4;
+    }
+  }
+
+  &[data-size="medium"] {
+    @apply py-2 px-3;
+
+    .body {
+      @apply text-sm;
+    }
+  }
+
+  &[data-size="small"] {
+    @apply py-1 px-2;
+
+    .body {
+      @apply text-xs;
+    }
+  }
 
   &.neutral {
     @apply bg-neutral-500  border-neutral-600 text-neutral-50;
@@ -11,13 +44,5 @@
 
   &.primary {
     @apply bg-primary-500 border-primary-600 text-primary-50;
-  }
-
-  .body {
-    @apply flex-nowrap items-center gap-1;
-  }
-
-  .prefix {
-    @apply size-4;
   }
 }

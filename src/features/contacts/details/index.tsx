@@ -23,13 +23,18 @@ const ContactDetails = () => {
       ) : (
         <Cluster className={styles.card}>
           <Avatar initials={initials} name={data?.name ?? ""} size='large' />
-          <Stack className={styles.body}>
-            <h2>{data.name}</h2>
-            <p>{data.phone}</p>
-          </Stack>
 
-          <Edit />
-          <Delete id={contactId} />
+          <Cluster className='gap-4 items-center'>
+            <Stack className={styles.body}>
+              <h2>{data.name}</h2>
+              <p>{data.phone}</p>
+            </Stack>
+
+            <Cluster className='gap-1'>
+              <Edit />
+              <Delete id={contactId} />
+            </Cluster>
+          </Cluster>
         </Cluster>
       )}
     </Cover>

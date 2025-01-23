@@ -8,21 +8,23 @@ export type Variant = "primary" | "danger" | "neutral";
 
 const Button: FunctionComponent<
   PropsWithChildren<{
-    prefixIcon?: ReactNode;
-    variant?: Variant;
     className?: string;
-    onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
+    onClick?: () => void;
+    prefixIcon?: ReactNode;
+    size?: "large" | "medium" | "small";
+    variant?: Variant;
   }>
 > = ({
-  onClick,
-  prefixIcon,
   children,
-  variant = "neutral",
   className,
   disabled,
   loading,
+  onClick,
+  prefixIcon,
+  size = "medium",
+  variant = "neutral",
 }) => {
   const btnCls = `${styles.btn} ${styles[variant]} ${className}`;
 
@@ -32,6 +34,7 @@ const Button: FunctionComponent<
       type='button'
       className={btnCls}
       disabled={disabled}
+      data-size={size}
     >
       <Cluster className={styles.body}>
         {loading ? (

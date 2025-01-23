@@ -5,6 +5,7 @@ import Cluster from "../cluster";
 import styles from "./index.module.css";
 
 export type Variant = "primary" | "danger" | "neutral";
+export type Size = "large" | "medium" | "small";
 
 const Button: FunctionComponent<
   PropsWithChildren<{
@@ -13,7 +14,7 @@ const Button: FunctionComponent<
     loading?: boolean;
     onClick?: () => void;
     prefixIcon?: ReactNode;
-    size?: "large" | "medium" | "small";
+    size?: Size;
     variant?: Variant;
   }>
 > = ({

@@ -10,3 +10,8 @@ export const fetchContacts = async (filter?: Filter) => {
   const response = await fetch(`${API_URL}/users${search}`);
   return (await response.json()) as Contact[];
 };
+
+export const fetchContact = async (id: number) => {
+  const response = await fetch(`${API_URL}/users/${id}`);
+  return (await response.json()) as Contact;
+};

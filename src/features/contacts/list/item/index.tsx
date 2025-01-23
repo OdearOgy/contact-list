@@ -1,36 +1,28 @@
-import { FunctionComponent } from "react";
-import { Cluster, Stack } from "../../../../components";
+import { useNavigate } from "@tanstack/react-router";
+import { FunctionComponent, useCallback } from "react";
+import { Avatar, Cluster, Stack } from "../../../../components";
+import { getInitials } from "../../../../utils/get-initials";
 import { Contact } from "../../_queries/models";
 import styles from "./index.module.css";
-
-const getInitials = (name: string) => {
-  const n = name?.trim().split(" ");
-
-  if (!n?.[0]) {
-    return "";
-  }
-
-  let initials = n?.[0]?.[0];
-
-  if (n.length > 1) {
-    initials += n?.[1]?.[0];
-  }
-
-  return initials.toUpperCase();
-};
 
 const ContactItem: FunctionComponent<{
   data: Contact;
 }> = ({ data }) => {
-  const { name, phone } = data;
+  const navigate = useNavigate({ from: "/contacts" });
+
+  const { name, phone, id } = data;
   const initials = getInitials(name);
 
-  return (
-    <Cluster className={styles.item}>
-      <div className={styles.avatar} title={name}>
-        <span>{initials}</span>
-      </div>
+  const handleDetailsNavigation = useCallback(() => {
+    navigate({
+      to: "/contacts/$contactId",
+      params: { contactId: id.toString() },
+    });
+  }, [id, navigate]);
 
+  return (
+    <Cluster className={styles.item} onClick={handleDetailsNavigation}>
+      <Avatar initials={initials} name={name} />
       <Stack className={styles.body}>
         <h2 title={name}>{name}</h2>
         <p title={phone}> {phone}</p>

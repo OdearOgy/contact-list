@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchContacts } from "./api";
+import { fetchContact, fetchContacts } from "./api";
 
 const CONTACTS_KEY = "contacts";
 
@@ -10,5 +10,12 @@ export const useContactsQuery = (search: string) => {
       fetchContacts({
         q: search ?? "",
       }),
+  });
+};
+
+export const useContactQuery = (id: number) => {
+  return useQuery({
+    queryKey: [CONTACTS_KEY, id],
+    queryFn: () => fetchContact(id),
   });
 };

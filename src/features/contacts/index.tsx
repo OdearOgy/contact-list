@@ -1,3 +1,4 @@
+import { Outlet } from "@tanstack/react-router";
 import { useState } from "react";
 import { Cluster, Stack } from "../../components";
 import Add from "./add";
@@ -19,6 +20,7 @@ const Contacts = () => {
           <List search={search} />
         </div>
       </Stack>
+      <Outlet />
     </Cluster>
   );
 };

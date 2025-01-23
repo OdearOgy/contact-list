@@ -1,0 +1,13 @@
+.avatar {
+  @apply relative flex items-center justify-center w-11 h-11;
+  @apply overflow-hidden border-primary-800 border rounded-full;
+  @apply bg-primary-50 text-primary-600;
+
+  span {
+    @apply font-normal text-primary-900 select-none;
+  }
+
+  &[data-size="large"] {
+    @apply w-16 h-16;
+  }
+}

@@ -27,6 +27,7 @@ const FormDialog: FunctionComponent<
     onOk?.();
   }, [onOk]);
 
+  // TODO (hom): Move classnames into a css file
   return (
     <Dialog open={open} onClose={handleCancel} className='relative z-50'>
       <DialogBackdrop className='fixed inset-0 bg-neutral-900/50' />

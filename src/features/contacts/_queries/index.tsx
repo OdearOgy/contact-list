@@ -77,6 +77,9 @@ export const useAddContactMutation = (
       queryClient.invalidateQueries({
         queryKey: [CONTACTS_KEY],
       });
+      queryClient.invalidateQueries({
+        queryKey: [DETAILS_KEY],
+      });
     },
   });
 };

@@ -1,16 +1,25 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 import { FunctionComponent, useCallback } from "react";
 import { Avatar, Cluster, Stack } from "../../../../components";
 import { getInitials } from "../../../../utils/get-initials";
 import { Contact } from "../../_queries/models";
 import styles from "./index.module.css";
 
-const ContactItem: FunctionComponent<{
-  data: Contact;
-}> = ({ data }) => {
-  const navigate = useNavigate({ from: "/contacts" });
+const EMPTY = {
+  id: "",
+  name: "",
+  phone: "",
+};
 
-  const { name, phone, id } = data;
+const ContactItem: FunctionComponent<{
+  data?: Contact;
+  loading?: boolean;
+}> = ({ data, loading }) => {
+  const navigate = useNavigate({ from: "/contacts" });
+  const params = useParams({ strict: false });
+  const contactId = parseInt(params.contactId ?? "");
+
+  const { name, phone, id } = data ?? EMPTY;
   const initials = getInitials(name);
 
   const handleDetailsNavigation = useCallback(() => {
@@ -20,12 +29,14 @@ const ContactItem: FunctionComponent<{
     });
   }, [id, navigate]);
 
+  const itemCls = `${styles.item} ${contactId === id ? styles.selected : ""} ${loading ? `${styles.loading} animate-pulse` : ""}`;
+
   return (
-    <Cluster className={styles.item} onClick={handleDetailsNavigation}>
-      <Avatar initials={initials} name={name} />
+    <Cluster className={itemCls} onClick={handleDetailsNavigation}>
+      <Avatar initials={initials} name={name} loading={loading} />
       <Stack className={styles.body}>
         <h2 title={name}>{name}</h2>
-        <p title={phone}> {phone}</p>
+        <p title={phone?.toString()}>{phone}</p>
       </Stack>
     </Cluster>
   );

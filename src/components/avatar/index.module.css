@@ -4,10 +4,18 @@
   @apply bg-primary-50 text-primary-600;
 
   span {
-    @apply font-normal text-primary-900 select-none;
+    @apply font-normal text-primary-900 select-none text-base;
   }
 
   &[data-size="large"] {
-    @apply w-16 h-16;
+    @apply w-24 h-24;
+
+    span {
+      @apply text-3xl;
+    }
+  }
+
+  &.loading {
+    @apply bg-neutral-600 border-neutral-600;
   }
 }

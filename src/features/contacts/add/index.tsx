@@ -5,15 +5,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "../../../components";
 import FormDialog from "../../../components/dialog";
 import { useAddContactMutation } from "../_queries";
-import { Contact } from "../_queries/models";
+import { FormDataDto } from "../_queries/models";
 import DetailsForm from "../details/form";
 
 const Add = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [edit, setEdit] = useState({
-    id: 0,
-    name: "",
-    phone: 0,
+  const [edit, setEdit] = useState<FormDataDto>({
+    id: null,
+    name: null,
+    phone: null,
   });
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -30,7 +30,7 @@ const Add = () => {
   }, []);
 
   const handleSubmit = useCallback(
-    (formData: Contact) => {
+    (formData: FormDataDto) => {
       setEdit((prevState) => {
         return { ...prevState, ...formData };
       });

@@ -34,6 +34,7 @@ const Delete: FunctionComponent<{
     <>
       <FormDialog
         title='Delete Contact'
+        message='Are you sure you want to delete this contact?'
         open={isOpen}
         onCancel={handleCancel}
         onOk={handleOk}

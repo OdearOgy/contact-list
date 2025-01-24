@@ -2,24 +2,24 @@ import { useForm } from "@tanstack/react-form";
 import { FunctionComponent, RefObject, useCallback } from "react";
 import { z } from "zod";
 import { Input, Stack } from "../../../../components";
-import { Contact } from "../../_queries/models";
+import { FormDataDto } from "../../_queries/models";
 import styles from "./index.module.css";
 
 const detailsFormSchema = z.object({
-  id: z.number().optional(),
-  name: z.string(),
-  phone: z.number(),
+  id: z.number().optional().nullish(),
+  name: z.string().min(2, "2 or more characters are needed").nullish(),
+  phone: z.number().nullish(),
 });
 
-const EMPTY: Contact = {
-  id: 0,
-  name: "",
-  phone: 0,
+const EMPTY: FormDataDto = {
+  id: null,
+  name: null,
+  phone: null,
 };
 
 const DetailsForm: FunctionComponent<{
-  data?: Contact;
-  onSubmit?: (formData: Contact) => void;
+  data?: FormDataDto;
+  onSubmit?: (formData: FormDataDto) => void;
   formRef: RefObject<HTMLFormElement>;
 }> = ({ data, onSubmit, formRef }) => {
   const Form = useForm({
@@ -30,7 +30,7 @@ const DetailsForm: FunctionComponent<{
   });
 
   const handleSubmit = useCallback(() => {
-    onSubmit?.(Form.state.values as Contact);
+    onSubmit?.(Form.state.values as FormDataDto);
     Form.handleSubmit();
   }, [Form, onSubmit]);
 
@@ -80,7 +80,8 @@ const DetailsForm: FunctionComponent<{
                 onBlur={field.handleBlur}
                 onChange={field.handleChange}
                 errors={field.state.meta.errors}
-                placeholder='Contact Name'
+                placeholder='full name (e.g. Jon Doe)'
+                label='Contact Name'
               />
             );
           }}
@@ -96,7 +97,8 @@ const DetailsForm: FunctionComponent<{
                 onBlur={field.handleBlur}
                 onChange={field.handleChange}
                 errors={field.state.meta.errors}
-                placeholder='Phone number'
+                placeholder='number (e.g. 12345678)'
+                label='Phone number'
               />
             );
           }}

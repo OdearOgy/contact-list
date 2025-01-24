@@ -13,7 +13,12 @@
 
   .header {
     @apply sticky top-0 z-10 bg-primary-100;
-    @apply items-center gap-1 pb-10;
+    @apply items-start gap-1 mb-5;
+
+    .back,
+    .add {
+      @apply pt-1.5;
+    }
   }
 
   .body {

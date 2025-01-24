@@ -6,8 +6,9 @@ const Avatar: FunctionComponent<{
   name: string;
   className?: string;
   size?: "large" | "small";
-}> = ({ initials, name, className, size }) => {
-  const avatarCls = `${styles.avatar} ${className ?? ""}`;
+  loading?: boolean;
+}> = ({ initials, name, className, size, loading }) => {
+  const avatarCls = `${styles.avatar} ${loading ? `${styles.loading} animate-pulse` : ""} ${className ?? ""}`;
 
   return (
     <div className={avatarCls} title={name} data-size={size ?? "small"}>

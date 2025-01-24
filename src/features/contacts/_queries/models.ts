@@ -9,6 +9,7 @@ export type Filter = {
 };
 
 export interface FormDataDto {
-  name: string;
-  phone: number;
+  id: number | null;
+  name: string | null;
+  phone: number | null;
 }

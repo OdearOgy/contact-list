@@ -51,7 +51,16 @@ const Search: FunctionComponent<{
       <Form.Field
         name='search'
         children={(field) => {
-          return <Input field={field} placeholder='Search' />;
+          return (
+            <Input
+              name={field.name}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={field.handleChange}
+              errors={field.state.meta.errors}
+              placeholder='Search'
+            />
+          );
         }}
       />
     </form>

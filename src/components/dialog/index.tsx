@@ -9,6 +9,7 @@ import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { FunctionComponent, PropsWithChildren, useCallback } from "react";
 import Button from "../button";
 import Cluster from "../cluster";
+import styles from "./index.module.css";
 
 const FormDialog: FunctionComponent<
   PropsWithChildren<{
@@ -28,20 +29,20 @@ const FormDialog: FunctionComponent<
     onOk?.();
   }, [onOk]);
 
-  // TODO (hom): Move classnames into a css file
   return (
-    <Dialog open={open} onClose={handleCancel} className='relative z-50'>
-      <DialogBackdrop className='fixed inset-0 bg-neutral-900/50' />
-      <div className='fixed inset-0 flex w-screen items-center justify-center p-4'>
-        <DialogPanel className='rounded max-w-lg w-full  bg-neutral-50 p-5 py-7'>
-          <DialogTitle>{title}</DialogTitle>
-          <Description>{message}</Description>
-          {children}
-          <Cluster className='justify-end gap-2'>
+    <Dialog open={open} onClose={handleCancel} className={styles.dialog}>
+      <DialogBackdrop className={styles.backdrop} />
+      <div className={styles.panelWrapper}>
+        <DialogPanel className={styles.panel}>
+          <DialogTitle className={styles.title}>{title}</DialogTitle>
+          <Description className={styles.description}>{message}</Description>
+          <div className={styles.body}>{children}</div>
+          <Cluster className={styles.footer}>
             <Button
               onClick={handleCancel}
               variant='neutral'
               prefixIcon={<XMarkIcon />}
+              disabled={loading}
             >
               Cancel
             </Button>

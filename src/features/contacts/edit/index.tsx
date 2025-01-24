@@ -11,14 +11,14 @@ import {
 import { Button } from "../../../components";
 import FormDialog from "../../../components/dialog";
 import { useEditContactMutation } from "../_queries";
-import { Contact } from "../_queries/models";
+import { Contact, FormDataDto } from "../_queries/models";
 import DetailsForm from "../details/form";
 
 const Edit: FunctionComponent<{
   data: Contact;
 }> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [edit, setEdit] = useState(data);
+  const [edit, setEdit] = useState<FormDataDto>(data);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const queryClient = useQueryClient();
@@ -34,7 +34,7 @@ const Edit: FunctionComponent<{
   }, []);
 
   const handleSubmit = useCallback(
-    (formData: Contact) => {
+    (formData: FormDataDto) => {
       setEdit((prevState) => {
         editMutation.mutate();
         return { ...prevState, ...formData };

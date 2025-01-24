@@ -10,84 +10,132 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./../pages/__root";
-import { Route as LayoutImport } from "./../pages/_layout";
-import { Route as IndexImport } from "./../pages/index";
+import { Route as rootRoute } from './../pages/__root'
+import { Route as ContactsImport } from './../pages/contacts'
+import { Route as LayoutImport } from './../pages/_layout'
+import { Route as IndexImport } from './../pages/index'
+import { Route as ContactsContactIdImport } from './../pages/contacts.$contactId'
 
 // Create/Update Routes
 
-const LayoutRoute = LayoutImport.update({
-  id: "/_layout",
+const ContactsRoute = ContactsImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const ContactsContactIdRoute = ContactsContactIdImport.update({
+  id: '/$contactId',
+  path: '/$contactId',
+  getParentRoute: () => ContactsRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_layout": {
-      id: "/_layout";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof LayoutImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsImport
+      parentRoute: typeof rootRoute
+    }
+    '/contacts/$contactId': {
+      id: '/contacts/$contactId'
+      path: '/$contactId'
+      fullPath: '/contacts/$contactId'
+      preLoaderRoute: typeof ContactsContactIdImport
+      parentRoute: typeof ContactsImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface ContactsRouteChildren {
+  ContactsContactIdRoute: typeof ContactsContactIdRoute
+}
+
+const ContactsRouteChildren: ContactsRouteChildren = {
+  ContactsContactIdRoute: ContactsContactIdRoute,
+}
+
+const ContactsRouteWithChildren = ContactsRoute._addFileChildren(
+  ContactsRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "": typeof LayoutRoute;
+  '/': typeof IndexRoute
+  '': typeof LayoutRoute
+  '/contacts': typeof ContactsRouteWithChildren
+  '/contacts/$contactId': typeof ContactsContactIdRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "": typeof LayoutRoute;
+  '/': typeof IndexRoute
+  '': typeof LayoutRoute
+  '/contacts': typeof ContactsRouteWithChildren
+  '/contacts/$contactId': typeof ContactsContactIdRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/_layout": typeof LayoutRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_layout': typeof LayoutRoute
+  '/contacts': typeof ContactsRouteWithChildren
+  '/contacts/$contactId': typeof ContactsContactIdRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "";
-  id: "__root__" | "/" | "/_layout";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '' | '/contacts' | '/contacts/$contactId'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '' | '/contacts' | '/contacts/$contactId'
+  id: '__root__' | '/' | '/_layout' | '/contacts' | '/contacts/$contactId'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  LayoutRoute: typeof LayoutRoute;
+  IndexRoute: typeof IndexRoute
+  LayoutRoute: typeof LayoutRoute
+  ContactsRoute: typeof ContactsRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LayoutRoute: LayoutRoute,
-};
+  ContactsRoute: ContactsRouteWithChildren,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -96,7 +144,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_layout"
+        "/_layout",
+        "/contacts"
       ]
     },
     "/": {
@@ -104,6 +153,16 @@ export const routeTree = rootRoute
     },
     "/_layout": {
       "filePath": "_layout.tsx"
+    },
+    "/contacts": {
+      "filePath": "contacts.tsx",
+      "children": [
+        "/contacts/$contactId"
+      ]
+    },
+    "/contacts/$contactId": {
+      "filePath": "contacts.$contactId.tsx",
+      "parent": "/contacts"
     }
   }
 }

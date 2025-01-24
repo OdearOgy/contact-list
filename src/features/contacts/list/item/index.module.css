@@ -1,22 +1,16 @@
 .item {
   @apply max-sm:justify-center gap-2 items-center;
-  @apply hover:bg-primary-300 p-2 rounded-lg cursor-pointer;
+  @apply bg-primary-200 hover:bg-primary-400 p-2 py-4 rounded-lg cursor-pointer;
 
-  .avatar {
-    @apply relative flex items-center justify-center w-11 h-11;
-    @apply overflow-hidden border-primary-800 border rounded-full;
-    @apply bg-primary-50 text-primary-600;
-
-    span {
-      @apply font-normal text-primary-900;
-    }
+  &.selected {
+    @apply bg-primary-500;
   }
 
   .body {
     @apply flex-nowrap w-5/6 max-sm:hidden;
 
     & > * + * {
-      @apply mt-0.5;
+      @apply mt-1;
     }
 
     & > * {
@@ -29,6 +23,24 @@
 
     p {
       @apply text-sm;
+    }
+  }
+
+  &.loading {
+    @apply cursor-not-allowed pointer-events-none;
+    @apply bg-neutral-300;
+
+    h2,
+    p {
+      @apply bg-neutral-600  rounded-lg text-neutral-600 h-4;
+    }
+
+    h2 {
+      @apply w-40;
+    }
+
+    p {
+      @apply w-20;
     }
   }
 }

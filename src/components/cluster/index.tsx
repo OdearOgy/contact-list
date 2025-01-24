@@ -4,9 +4,14 @@ import styles from "./index.module.css";
 const Cluster: FunctionComponent<
   PropsWithChildren<{
     className?: string;
+    onClick?: () => void;
   }>
-> = ({ children, className }) => {
-  return <div className={`${styles.cluster} ${className}`}>{children}</div>;
+> = ({ children, className, onClick }) => {
+  return (
+    <div onClick={onClick} className={`${styles.cluster} ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 export default Cluster;

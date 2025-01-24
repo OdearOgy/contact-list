@@ -6,8 +6,7 @@ import {
   useCallback,
 } from "react";
 import { z } from "zod";
-import { Stack } from "../../../components";
-import styles from "./index.module.css";
+import { Input } from "../../../components";
 
 const searchSchema = z.object({
   search: z.string().min(2, "2 or more characters are needed"),
@@ -53,22 +52,14 @@ const Search: FunctionComponent<{
         name='search'
         children={(field) => {
           return (
-            <Stack className={styles.field}>
-              <input
-                name={field.name}
-                value={field.state.value?.toString()}
-                className={styles.input}
-                placeholder='Search'
-                onChange={(e) => field.handleChange(e.target.value)}
-                onBlur={() => field.form.handleSubmit()}
-              />
-
-              {field.state.meta.errors ? (
-                <span className={styles.helpText}>
-                  {field.state.meta.errors.join(", ")}
-                </span>
-              ) : null}
-            </Stack>
+            <Input
+              name={field.name}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={field.handleChange}
+              errors={field.state.meta.errors}
+              placeholder='Search'
+            />
           );
         }}
       />

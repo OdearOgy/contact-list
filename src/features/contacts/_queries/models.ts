@@ -1,11 +1,15 @@
-export type Contact = {
+export interface Contact {
   id: number;
   name: string;
-  email: string;
-  phone: string;
-  username: string;
-};
+  phone: number;
+}
 
 export type Filter = {
   q: string;
 };
+
+export interface FormDataDto {
+  id: number | null;
+  name: string | null;
+  phone: number | null;
+}

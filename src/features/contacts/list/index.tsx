@@ -7,21 +7,24 @@ import ContactItem from "./item";
 const List: FunctionComponent<{
   search: string;
 }> = ({ search }) => {
-  const { data, isError, isPending } = useContactsQuery(search);
-
-  if (isPending) {
-    return <div>loading ....</div>;
-  }
-
-  if (isError) {
-    return <div>some random error</div>;
-  }
+  const { data, isError, isPending, isSuccess } = useContactsQuery(search);
+  const noDataFound = isSuccess && !data.length;
 
   return (
     <Stack className={styles.list}>
-      {data?.map((contact) => {
-        return <ContactItem data={contact} key={contact.id} />;
-      })}
+      {isPending ? (
+        [1, 2, 3]?.map((contact) => {
+          return <ContactItem key={contact} loading />;
+        })
+      ) : isError ? (
+        <div>some random error</div>
+      ) : noDataFound ? (
+        <div>no data found</div>
+      ) : (
+        data?.map((contact) => {
+          return <ContactItem data={contact} key={contact.id} />;
+        })
+      )}
     </Stack>
   );
 };

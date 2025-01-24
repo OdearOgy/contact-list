@@ -1,25 +1,29 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Button } from "../../../components";
 import FormDialog from "../../../components/dialog";
-import { useAddContactMutation } from "../_queries";
-import { FormDataDto } from "../_queries/models";
+import { useEditContactMutation } from "../_queries";
+import { Contact, FormDataDto } from "../_queries/models";
 import DetailsForm from "../details/form";
 
-const Add = () => {
+const Edit: FunctionComponent<{
+  data: Contact;
+}> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [edit, setEdit] = useState<FormDataDto>({
-    id: null,
-    name: null,
-    phone: null,
-  });
+  const [edit, setEdit] = useState<FormDataDto>(data);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const queryClient = useQueryClient();
-  const addMutation = useAddContactMutation(edit, queryClient);
-  const navigate = useNavigate({ from: "/contacts" });
+  const editMutation = useEditContactMutation(data.id, edit, queryClient);
+  const navigate = useNavigate({ from: "/contacts/$contactId" });
 
   const handleCancel = useCallback(() => {
     setIsOpen(false);
@@ -32,44 +36,41 @@ const Add = () => {
   const handleSubmit = useCallback(
     (formData: FormDataDto) => {
       setEdit((prevState) => {
+        editMutation.mutate();
         return { ...prevState, ...formData };
       });
-      addMutation.mutate();
     },
-    [setEdit, addMutation],
+    [setEdit, editMutation],
   );
 
   useEffect(() => {
-    if (addMutation.isSuccess) {
+    if (editMutation.isSuccess) {
       setIsOpen(false);
       navigate({
-        to: "/contacts/$contactId",
-        params: {
-          contactId: addMutation.data.id?.toString(),
-        },
+        to: "/contacts",
       });
     }
-  }, [addMutation, navigate]);
+  }, [editMutation, navigate]);
 
   return (
     <>
       <FormDialog
-        title='Add Contact'
+        title='Edit Contact'
         open={isOpen}
         onCancel={handleCancel}
         onOk={handleOk}
-        loading={addMutation.isPending}
+        loading={editMutation.isPending}
       >
-        <DetailsForm formRef={formRef} onSubmit={handleSubmit} />
+        <DetailsForm formRef={formRef} data={edit} onSubmit={handleSubmit} />
       </FormDialog>
       <Button
         variant='primary'
         onClick={() => setIsOpen(true)}
-        prefixIcon={<PlusIcon />}
+        prefixIcon={<PencilIcon />}
         size='small'
       />
     </>
   );
 };
 
-export default Add;
+export default Edit;

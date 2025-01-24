@@ -9,8 +9,7 @@ Follow these steps to set up the project locally.
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone git@gitlab.com:OdearOgy/contact-list.git
 ```
 
 ### 2. Install Dependencies

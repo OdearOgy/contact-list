@@ -1,3 +1,5 @@
+This is an imported repo from [gitlab](https://gitlab.com/OdearOgy/contact-list)
+
 # Contact List
 
 Simple crud app with React + Ts (tailwind, tanstack - router, query, form)
